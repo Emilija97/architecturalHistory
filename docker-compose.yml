@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+  web.api:
+    image: ${DOCKER_REGISTRY-}webapi
+    container_name: architectural-history-api
+    build:
+      context: .
+      dockerfile: Web.API/Dockerfile
+
+  architecuralhistory.db:
+    image: postgres:latest
+    container_name: architectural-history-db
+    environment:
+      - POSTGRES_DB=architecturalhistory
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./.containers/db:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
