@@ -20,7 +20,7 @@ public class VirtualTour
 
     private List<InteractiveSession> _scheduledSessions = new();
 
-    public VirtualTour(VirtualTourId virtualTourId, EstateId estateId, ReservationId reservationId, TimeSpan duration, string narrationLanguage, Price tourPrice)
+    internal VirtualTour(VirtualTourId virtualTourId, EstateId estateId, ReservationId reservationId, TimeSpan duration, string narrationLanguage, Price tourPrice)
     {
         Id = virtualTourId;
         EstateId = estateId;

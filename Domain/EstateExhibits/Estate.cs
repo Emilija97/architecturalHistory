@@ -36,9 +36,14 @@ public class Estate
 
     public Location Location { get; private set; }
 
-    public void AddHistoricalEvent(HistoricalEvent historicalEvent)
+    public void AddHistoricalEvent(DateTime date, string description, string impact)
     {
-        _events.Add(historicalEvent ?? throw new ArgumentNullException(nameof(historicalEvent)));
+        var hisEvent = new HistoricalEvent(
+            new HistoricalEventId(Guid.NewGuid()),
+            Id,
+            date, description, impact);
+       
+        _events.Add(hisEvent);
     }
 
     public void AddVirtualTour(VirtualTour virtualTour)

@@ -2,7 +2,7 @@
 
 public class MultimediaContent
 {
-    public MultimediaContent(MultimediaContentId id, HistoricalEventId historicalId, string url, DateTime creationDate)
+    internal MultimediaContent(MultimediaContentId id, HistoricalEventId historicalId, string url, DateTime creationDate)
     {
         Id = id;
         Url = url ?? throw new ArgumentNullException(nameof(url));

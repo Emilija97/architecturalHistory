@@ -35,9 +35,15 @@ public class HistoricalEvent
         Impact = impact ?? throw new ArgumentNullException(nameof(impact));
     }
 
-    public void AddMultimediaContent(MultimediaContent content)
+    public void AddMultimediaContent(string url, DateTime creationDate)
     {
-        _multimediaContents.Add(content ?? throw new ArgumentNullException(nameof(content)));
+        var multimediaContent = new MultimediaContent(
+            new MultimediaContentId(Guid.NewGuid()),
+            Id,
+            url,
+            creationDate);
+
+        _multimediaContents.Add(multimediaContent);
     }
 
     public void RemoveMultimediaContent(MultimediaContent content)

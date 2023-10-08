@@ -27,10 +27,12 @@ public class Expert
     {
     }
 
-    public void UpdateContactInfo(string email) 
+    public void UpdateContactInfo(string name, string email) 
     {
         if (!string.IsNullOrWhiteSpace(email))
             Email = email;
+        if (!string.IsNullOrWhiteSpace(name))
+            Name = name;
     }
 
     public void AssociatedWithEstate(EstateId estateId)
