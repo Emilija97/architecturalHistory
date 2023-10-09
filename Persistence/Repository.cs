@@ -1,9 +1,10 @@
 ﻿using Application.Data;
+using Domain.Shared;
 using Microsoft.EntityFrameworkCore;
 
 namespace Persistence;
 
-public class Repository<TEntity> : IRepository<TEntity>
+public class Repository<TEntity, TId> : IRepository<TEntity, TId>
     where TEntity : class
 {
     private readonly ApplicationDbContext _context;
@@ -18,7 +19,7 @@ public class Repository<TEntity> : IRepository<TEntity>
         return await _context.Set<TEntity>().ToListAsync();
     }
 
-    public async Task<TEntity?> GetByIdAsync(Guid id)
+    public async Task<TEntity?> GetByIdAsync(TId id)
     {
         return await _context.Set<TEntity>().FindAsync(id);
     }

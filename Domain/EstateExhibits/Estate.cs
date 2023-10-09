@@ -1,8 +1,9 @@
 ﻿using Domain.DigitalTours;
+using Domain.Shared;
 
 namespace Domain.EstateExhibits;
 
-public class Estate
+public class Estate : IEntityWithGuidId
 {
     public Estate(EstateId id, string name, ArchitecturalStyle architecturalStyle, YearBuilt yearBuilt, Location location)
     {
@@ -61,5 +62,10 @@ public class Estate
         }
 
         _virtualTours.Remove(virtualTour);
+    }
+
+    public Guid GetGuidId()
+    {
+        return Id.Value;
     }
 }

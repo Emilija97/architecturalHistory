@@ -7,11 +7,11 @@ namespace Application.Participants.Update;
 
 internal sealed class UpdateParticipantCommandQueryHandler : IRequestHandler<UpdateParticipantCommand>
 {
-    private readonly IRepository<Participant> _participantRepository;
+    private readonly IRepository<Participant, ParticipantId> _participantRepository;
 
     private readonly IApplicationDbContext _context;
 
-    public UpdateParticipantCommandQueryHandler(IRepository<Participant> participantRepository, IApplicationDbContext context)
+    public UpdateParticipantCommandQueryHandler(IRepository<Participant, ParticipantId> participantRepository, IApplicationDbContext context)
     {
         _context = context;
         _participantRepository = participantRepository;

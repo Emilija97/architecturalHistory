@@ -6,9 +6,9 @@ namespace Application.EstateExhibits.Create;
 
 internal sealed class CreateEstateCommandHandler : IRequestHandler<CreateEstateCommand>
 {
-    private readonly IRepository<Estate> _estateRepository;
+    private readonly IRepository<Estate, EstateId> _estateRepository;
 
-    public CreateEstateCommandHandler(IRepository<Estate> estateRepository)
+    public CreateEstateCommandHandler(IRepository<Estate, EstateId> estateRepository)
     {
         _estateRepository = estateRepository;
     }

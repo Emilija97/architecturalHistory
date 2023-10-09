@@ -14,4 +14,5 @@ public record EstateResponse(
     string Latitude,
     string Longitude,
     string Address,
-    int Year);
+    int Year,
+    List<HistoricalEventResponse> HistoricalEventResponses);

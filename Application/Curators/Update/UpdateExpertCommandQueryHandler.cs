@@ -7,11 +7,11 @@ namespace Application.Curators.Update;
 
 internal class UpdateExpertCommandQueryHandler : IRequestHandler<UpdateExpertCommand>
 {
-    private readonly IRepository<Expert> _expertRepository;
+    private readonly IRepository<Expert, ExpertId> _expertRepository;
 
     private readonly IApplicationDbContext _context;
 
-    public UpdateExpertCommandQueryHandler(IRepository<Expert> expertRepository, IApplicationDbContext context)
+    public UpdateExpertCommandQueryHandler(IRepository<Expert, ExpertId> expertRepository, IApplicationDbContext context)
     {
         _context = context;
         _expertRepository = expertRepository;

@@ -26,7 +26,10 @@ internal sealed class GetAllEstatesQueryHandler : IRequestHandler<GetAllEstatesQ
                 e.Location.Latitude,
                 e.Location.Longitude,
                 e.Location.Address,
-                e.YearBuilt.Year))
+                e.YearBuilt.Year,
+                e.Events
+                    .Select(he => new HistoricalEventResponse(he.Id, he.Date, he.Description, he.Impact))
+                    .ToList()))
             .ToListAsync(cancellationToken);
 
         return estates is null ? throw new Exception("There is no any estate yet!") : estates;

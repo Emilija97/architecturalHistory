@@ -10,14 +10,14 @@ internal sealed class AddMultimediaContentToHistoricalEventCommandHandler : IReq
 
     private readonly IApplicationDbContext _context;
     private readonly IPublisher _publisher;
-    private readonly IRepository<HistoricalEvent> _historicalEventsRepository;
-    private readonly IRepository<MultimediaContent> _multimediaContentsRepository;
+    private readonly IRepository<HistoricalEvent, HistoricalEventId> _historicalEventsRepository;
+    private readonly IRepository<MultimediaContent, MultimediaContentId> _multimediaContentsRepository;
 
     public AddMultimediaContentToHistoricalEventCommandHandler(
         IApplicationDbContext context,
         IPublisher publisher,
-        IRepository<HistoricalEvent> historicalEventsRepository,
-        IRepository<MultimediaContent> multimediaContentsRepository)
+        IRepository<HistoricalEvent, HistoricalEventId> historicalEventsRepository,
+        IRepository<MultimediaContent, MultimediaContentId> multimediaContentsRepository)
     {
         _context = context;
         _publisher = publisher;
@@ -30,7 +30,7 @@ internal sealed class AddMultimediaContentToHistoricalEventCommandHandler : IReq
 
         var historicalEvents = await _context.HistoricalEvents.Include(he => he.MultimediaContents).ToListAsync(cancellationToken);
 
-        var historicalEvent = await _historicalEventsRepository.GetByIdAsync(request.HistoricalEventId.Value);
+        var historicalEvent = await _historicalEventsRepository.GetByIdAsync(request.HistoricalEventId);
 
         if (historicalEvent is null)
         {

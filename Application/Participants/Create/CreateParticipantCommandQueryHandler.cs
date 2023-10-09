@@ -7,9 +7,9 @@ namespace Application.Participants.Create;
 internal class CreateParticipantCommandQueryHandler : IRequestHandler<CreateParticipantCommand>
 {
 
-    private readonly IRepository<Participant> _participantRepository;
+    private readonly IRepository<Participant, ParticipantId> _participantRepository;
 
-    public CreateParticipantCommandQueryHandler(IRepository<Participant> participantRepository)
+    public CreateParticipantCommandQueryHandler(IRepository<Participant, ParticipantId> participantRepository)
     {
         _participantRepository = participantRepository;
     }

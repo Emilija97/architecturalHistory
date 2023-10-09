@@ -27,7 +27,10 @@ internal sealed class ReadEstateQueryCommandHandler : IRequestHandler<ReadEstate
                 e.Location.Latitude,
                 e.Location.Longitude,
                 e.Location.Address,
-                e.YearBuilt.Year))
+                e.YearBuilt.Year,
+                e.Events
+                    .Select(he => new HistoricalEventResponse(he.Id, he.Date.Date, he.Description, he.Impact))
+                    .ToList()))
             .FirstOrDefaultAsync(cancellationToken);
 
         if(estate is null)

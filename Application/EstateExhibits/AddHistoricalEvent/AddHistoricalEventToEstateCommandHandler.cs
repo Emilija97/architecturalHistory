@@ -11,12 +11,12 @@ internal sealed class AddHistoricalEventToEstateCommandHandler : IRequestHandler
 
     private readonly IApplicationDbContext _context;
     private readonly IPublisher _publisher;
-    private readonly IRepository<Estate> _estateRepository;
+    private readonly IRepository<Estate, EstateId> _estateRepository;
 
     public AddHistoricalEventToEstateCommandHandler(
         IApplicationDbContext context,
         IPublisher publisher,
-        IRepository<Estate> estateRepository)
+        IRepository<Estate, EstateId> estateRepository)
     {
         _context = context;
         _publisher = publisher;
@@ -28,7 +28,7 @@ internal sealed class AddHistoricalEventToEstateCommandHandler : IRequestHandler
 
         var estates = await _context.Estates.Include(e => e.Events).ToListAsync(cancellationToken);
 
-        var estate = await _estateRepository.GetByIdAsync(request.EstateId.Value);
+        var estate = await _estateRepository.GetByIdAsync(request.EstateId);
 
 
         if (estate is null)
@@ -49,7 +49,7 @@ internal sealed class AddHistoricalEventToEstateCommandHandler : IRequestHandler
 
         if (!addedEvent)
         {
-            estate.AddHistoricalEvent(request.Date, request.Description, request.Impact);
+            estate.AddHistoricalEvent(request.Date.ToUniversalTime(), request.Description, request.Impact);
             await _context.SaveChangesAsync();
             await _publisher.Publish(new EstateCreatedEvent(estate.Id), cancellationToken);
         }

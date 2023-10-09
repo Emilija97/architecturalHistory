@@ -1,10 +1,10 @@
 ﻿namespace Application.Data;
 
-public interface IRepository<TEntity>
+public interface IRepository<TEntity, TId>
 {
     Task<List<TEntity>> GetAllAsync();
 
-    Task<TEntity?> GetByIdAsync(Guid id);
+    Task<TEntity?> GetByIdAsync(TId id);
 
     IQueryable<TEntity> GetQueryable();
 

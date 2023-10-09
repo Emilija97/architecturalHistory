@@ -7,9 +7,9 @@ namespace Application.Curators.Create;
 internal sealed class CreateExpertCommandQueryHandler : IRequestHandler<CreateExpertCommand>
 {
 
-    private readonly IRepository<Expert> _expertRepository;
+    private readonly IRepository<Expert, ExpertId> _expertRepository;
 
-    public CreateExpertCommandQueryHandler(IRepository<Expert> expertRepository)
+    public CreateExpertCommandQueryHandler(IRepository<Expert, ExpertId> expertRepository)
     {
         _expertRepository = expertRepository;
     }

@@ -12,14 +12,14 @@ internal sealed class AssociateEstateToExpertCommandHandler : IRequestHandler<As
 
     private readonly IApplicationDbContext _context;
     private readonly IPublisher _publisher;
-    private readonly IRepository<Expert> _expertRepository;
-    private readonly IRepository<Estate> _estateRepository;
+    private readonly IRepository<Expert, ExpertId> _expertRepository;
+    private readonly IRepository<Estate, EstateId> _estateRepository;
 
     public AssociateEstateToExpertCommandHandler(
         IApplicationDbContext context,
         IPublisher publisher,
-        IRepository<Expert> expertRepository,
-        IRepository<Estate> EstateRepository)
+        IRepository<Expert, ExpertId> expertRepository,
+        IRepository<Estate, EstateId> EstateRepository)
     {
         _context = context;
         _publisher = publisher;
@@ -32,9 +32,9 @@ internal sealed class AssociateEstateToExpertCommandHandler : IRequestHandler<As
 
         var experts = await _context.Experts.Include(e => e.AssociatedEstates).ToListAsync(cancellationToken);
 
-        var expert = await _expertRepository.GetByIdAsync(request.ExpertId.Value);
+        var expert = await _expertRepository.GetByIdAsync(request.ExpertId);
 
-        var estate = await _estateRepository.GetByIdAsync(request.EstateId.Value);
+        var estate = await _estateRepository.GetByIdAsync(request.EstateId);
 
         if (expert is null || estate is null)
         {
