@@ -8,9 +8,9 @@ services:
       context: .
       dockerfile: Web.API/Dockerfile
 
-  architecuralhistory.db:
+  architecturalhistory.db:
     image: postgres:latest
-    container_name: architectural-history-db
+    container_name: architectural-history-database
     environment:
       - POSTGRES_DB=architecturalhistory
       - POSTGRES_USER=postgres

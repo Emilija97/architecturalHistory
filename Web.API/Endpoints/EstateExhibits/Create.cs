@@ -26,7 +26,7 @@ namespace Web.API.Endpoints.EstateExhibits
                 return Results.Ok();
             });
 
-            app.MapDelete("estates/historical_event/add_multimedia_content", async (Guid historicalEventId, string url, DateTime creationDate, ISender sender) =>
+            app.MapPost("estates/historical_event/add_multimedia_content", async (Guid historicalEventId, string url, DateTime creationDate, ISender sender) =>
             {
                 var command = new AddMultimediaContentToHistoricalEvent(new HistoricalEventId(historicalEventId), url, creationDate);
 

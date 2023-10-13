@@ -28,7 +28,10 @@ internal sealed class GetAllEstatesQueryHandler : IRequestHandler<GetAllEstatesQ
                 e.Location.Address,
                 e.YearBuilt.Year,
                 e.Events
-                    .Select(he => new HistoricalEventResponse(he.Id, he.Date, he.Description, he.Impact))
+                    .Select(he => new HistoricalEventResponse(he.Id.Value, he.Date.Date, he.Description, he.Impact,
+                he.MultimediaContents
+                    .Select(mc => new MultimediaContentResponse(mc.Id.Value, mc.Url, mc.CreationDate.Date))
+                    .ToList()))
                     .ToList()))
             .ToListAsync(cancellationToken);
 

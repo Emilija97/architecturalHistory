@@ -12,6 +12,8 @@ public class VirtualTour
 
     public TimeSpan Duration { get; private set; }
 
+    public DateTime OrganizedAt { get; private set; }
+
     public string NarrationLanguage { get; private set; } = "en";
 
     public Price TourPrice { get; private set; }
@@ -20,7 +22,7 @@ public class VirtualTour
 
     private List<InteractiveSession> _scheduledSessions = new();
 
-    internal VirtualTour(VirtualTourId virtualTourId, EstateId estateId, ReservationId reservationId, TimeSpan duration, string narrationLanguage, Price tourPrice)
+    internal VirtualTour(VirtualTourId virtualTourId, EstateId estateId, ReservationId reservationId, TimeSpan duration, string narrationLanguage, Price tourPrice, DateTime organizedAt)
     {
         Id = virtualTourId;
         EstateId = estateId;
@@ -28,6 +30,7 @@ public class VirtualTour
         Duration = duration;
         NarrationLanguage = narrationLanguage;
         TourPrice = tourPrice;
+        OrganizedAt = organizedAt;
     }
 
     private VirtualTour()

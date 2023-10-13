@@ -1,9 +1,10 @@
 ﻿using Domain.EstateExhibits;
 using Domain.Participants;
+using Domain.Shared;
 
 namespace Domain.DigitalTours;
 
-public class Reservation
+public class Reservation : IEntityWithGuidId
 {
     public ReservationId Id { get; private set; }
     
@@ -17,7 +18,7 @@ public class Reservation
 
     public IReadOnlyList<VirtualTour> VirtualTours => _virtualTours.ToList();
 
-    public static Reservation Create(ParticipantId participantId, EstateId estateId, decimal Amount, string Currency, TimeSpan duration, string narattionLanguage)
+    public static Reservation Create(ParticipantId participantId, EstateId estateId, decimal Amount, string Currency, TimeSpan duration, string narattionLanguage, DateTime organizedAt)
     {
         var reservation = new Reservation
         {
@@ -25,12 +26,12 @@ public class Reservation
             ParticipantId = participantId,
         };
 
-        reservation.Add(estateId, new Price(Amount, Currency), duration, narattionLanguage);
+        reservation.Add(estateId, new Price(Amount, Currency), duration, narattionLanguage, organizedAt);
 
         return reservation;
     }
 
-    public void Add(EstateId estateId, Price price, TimeSpan duration, string narattionLanguage)
+    public void Add(EstateId estateId, Price price, TimeSpan duration, string narattionLanguage, DateTime organizedAt)
     {
         var virtualTour = new VirtualTour(
             new VirtualTourId(Guid.NewGuid()),
@@ -38,7 +39,8 @@ public class Reservation
             Id,
             duration,
             narattionLanguage,
-            price
+            price,
+            organizedAt
             );
 
         _virtualTours.Add(virtualTour);
@@ -54,5 +56,10 @@ public class Reservation
         }
 
         _virtualTours.Remove(virtualTour);
+    }
+
+    public Guid GetGuidId()
+    {
+        return Id.Value;
     }
 }

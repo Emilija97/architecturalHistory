@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class Create_Database : Migration
+    public partial class InitializeDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -144,6 +144,7 @@ namespace Persistence.Migrations
                     estate_id = table.Column<Guid>(type: "uuid", nullable: false),
                     reservation_id = table.Column<Guid>(type: "uuid", nullable: false),
                     duration = table.Column<TimeSpan>(type: "interval", nullable: false),
+                    organized_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     narration_language = table.Column<string>(type: "character varying(5)", maxLength: 5, nullable: false),
                     tour_price_amount = table.Column<decimal>(type: "numeric", nullable: false),
                     tour_price_currency = table.Column<string>(type: "character varying(3)", maxLength: 3, nullable: false)

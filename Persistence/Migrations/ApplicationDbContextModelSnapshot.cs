@@ -161,6 +161,10 @@ namespace Persistence.Migrations
                         .HasColumnType("character varying(5)")
                         .HasColumnName("narration_language");
 
+                    b.Property<DateTime>("OrganizedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("organized_at");
+
                     b.Property<Guid>("ReservationId")
                         .HasColumnType("uuid")
                         .HasColumnName("reservation_id");

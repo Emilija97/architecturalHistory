@@ -12,8 +12,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231007211527_Create_Database")]
-    partial class Create_Database
+    [Migration("20231013123104_InitializeDatabase")]
+    partial class InitializeDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -163,6 +163,10 @@ namespace Persistence.Migrations
                         .HasMaxLength(5)
                         .HasColumnType("character varying(5)")
                         .HasColumnName("narration_language");
+
+                    b.Property<DateTime>("OrganizedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("organized_at");
 
                     b.Property<Guid>("ReservationId")
                         .HasColumnType("uuid")

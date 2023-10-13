@@ -46,15 +46,15 @@ public class HistoricalEvent
         _multimediaContents.Add(multimediaContent);
     }
 
-    public void RemoveMultimediaContent(MultimediaContent content)
+    public void RemoveMultimediaContent(MultimediaContentId multimediaContentId)
     {
-        var multimediaContent = _multimediaContents.FirstOrDefault(he => he.Id == content.Id);
+        var multimediaContent = _multimediaContents.FirstOrDefault(he => he.Id == multimediaContentId);
 
         if (multimediaContent is null)
         {
             return;
         }
 
-        _multimediaContents.Remove(content);
+        _multimediaContents.Remove(multimediaContent);
     }
 }

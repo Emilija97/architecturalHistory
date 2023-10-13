@@ -11,10 +11,9 @@ internal class EstateConfiguration : IEntityTypeConfiguration<Estate>
     {
         builder.HasKey(es => es.Id);
 
-        builder.Property(e => e.Id)
-               .HasConversion(
-                    e => e.Value, 
-                    value => new EstateId(value));
+        builder.Property(e => e.Id).HasConversion(
+                estateId => estateId.Value,
+                value => new EstateId(value));
 
         builder.Property(e => e.Name)
                .HasMaxLength(250) 

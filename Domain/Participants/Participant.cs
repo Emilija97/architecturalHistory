@@ -1,6 +1,8 @@
-﻿namespace Domain.Participants;
+﻿using Domain.Shared;
 
-public class Participant
+namespace Domain.Participants;
+
+public class Participant : IEntityWithGuidId
 {
     private Participant()
     {
@@ -34,5 +36,10 @@ public class Participant
     {
         FirstName = firstName;
         LastName = lastName;
+    }
+
+    public Guid GetGuidId()
+    {
+        return Id.Value;
     }
 }

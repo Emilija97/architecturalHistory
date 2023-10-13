@@ -23,6 +23,14 @@ internal class VirtualTourConfiguration : IEntityTypeConfiguration<VirtualTour>
             .HasMaxLength(5)
             .IsRequired();
 
+        builder.Property(vt => vt.OrganizedAt)
+            .IsRequired();
+
+        //builder.HasOne<Estate>()
+        //    .WithMany(e => e.VirtualTours)
+        //    .HasForeignKey(vt => vt.EstateId);
+
+
         builder.OwnsOne(vt => vt.TourPrice, tourPriceBuilder =>
         {
             tourPriceBuilder.Property(p => p.Amount).IsRequired();

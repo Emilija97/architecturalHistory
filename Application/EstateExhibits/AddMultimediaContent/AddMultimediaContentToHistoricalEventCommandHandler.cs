@@ -50,7 +50,7 @@ internal sealed class AddMultimediaContentToHistoricalEventCommandHandler : IReq
 
         if (!addedContent)
         {
-            historicalEvent.AddMultimediaContent(request.Url, request.CreationDate);
+            historicalEvent.AddMultimediaContent(request.Url, request.CreationDate.ToUniversalTime());
             await _context.SaveChangesAsync();
         }
         else
