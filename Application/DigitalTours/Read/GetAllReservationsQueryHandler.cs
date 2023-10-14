@@ -21,7 +21,13 @@ internal sealed class GetAllReservationsQueryHandler : IRequestHandler<GetAllRes
                 r.Id.Value,
                 r.ParticipantId.Value,
                 r.VirtualTours
-                    .Select(vt => new VirtualTourResponse(vt.Id.Value, vt.TourPrice.Amount, vt.Duration, vt.NarrationLanguage, vt.OrganizedAt))
+                    .Select(vt => new VirtualTourResponse(vt.Id.Value,
+                                                          vt.TourPrice.Amount,
+                                                          vt.Duration,
+                                                          vt.NarrationLanguage,
+                                                          vt.OrganizedAt, 
+                                                          vt.ScheduledHighlights.Select(h => new HighlightResponse(h.Id.Value, h.Description)).ToList(),
+                                                          vt.ScheduledSessions.Select(isess => new InteractiveSessionResponse(isess.Id.Value, isess.ExpertId.Value, isess.SheduledTime, isess.Duration)).ToList()))
                     .ToList()
             )).ToListAsync(cancellationToken);
 
